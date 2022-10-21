@@ -1,0 +1,41 @@
+{
+  "mappings": {
+    "_doc": {
+      "dynamic": "strict",
+      "properties": {
+        "app_id": {
+          "type": "keyword",
+          "store": true
+        },
+        "version_code": {
+          "type": "long",
+          "store": true
+        },
+        "type": {
+          "type": "keyword",
+          "store": true
+        },
+        "message": {
+          "type": "keyword",
+          "store": true
+        },
+        "creator_id": {
+          "type": "keyword",
+          "store": true
+        },
+        "creator_name": {
+          "type": "keyword",
+          "store": true
+        },
+        "status": {
+          "type": "integer",
+          "store": true
+        },
+        "create_ts": {
+          "type": "long",
+          "store": true
+        }
+      }
+    }
+  }
+}

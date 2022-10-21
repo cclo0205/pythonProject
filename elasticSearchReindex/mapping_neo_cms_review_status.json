@@ -1,0 +1,41 @@
+{
+  "mappings": {
+    "_doc": {
+      "dynamic": "strict",
+      "properties": {
+        "app_id": {
+          "type": "keyword",
+          "store": true
+        },
+        "release_channel": {
+          "type": "keyword",
+          "store": true
+        },
+        "s3sync": {
+          "type": "integer",
+          "store": true
+        },
+        "cv": {
+          "type": "integer",
+          "store": true
+        },
+        "review": {
+          "type": "integer",
+          "store": true
+        },
+        "wrapper": {
+          "type": "integer",
+          "store": true
+        },
+        "payment": {
+          "type": "integer",
+          "store": true
+        },
+        "publish": {
+          "type": "integer",
+          "store": true
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,1521 @@
+{
+  "settings": {
+    "index": {
+      "number_of_shards": 5,
+      "number_of_replicas": 1,
+      "analysis": {
+        "analyzer": {
+          "en_analyzer_stop": {
+            "tokenizer": "icu_tokenizer",
+            "filter": ["icu_folding", "icu_normalizer", "en_stem_filter"]
+          },
+          "es_analyzer_stop": {
+            "tokenizer": "icu_tokenizer",
+            "filter": ["icu_folding", "icu_normalizer", "es_stem_filter"]
+          },
+          "ik_max_word_sc": {
+            "tokenizer": "ik_max_word",
+            "filter": ["tsconvert"],
+            "char_filter": ["tsconvert"]
+          },
+          "ik_max_word_tc": {
+            "tokenizer": "ik_max_word",
+            "filter": ["stconvert"],
+            "char_filter": ["tsconvert"]
+          },
+          "ik_smart_sc": {
+            "tokenizer": "ik_smart",
+            "filter": ["tsconvert"],
+            "char_filter": ["tsconvert"]
+          },
+          "ik_smart_tc": {
+            "tokenizer": "ik_smart",
+            "filter": ["stconvert"],
+            "char_filter": ["tsconvert"]
+          },
+          "ja_analyzer": {
+            "tokenizer": "kuromoji_tokenizer",
+            "filter": ["icu_folding", "icu_normalizer"]
+          },
+          "ko_analyzer": {
+            "type": "cjk"
+          },
+          "no_analyzer": {
+            "type": "custom",
+            "tokenizer": "icu_tokenizer",
+            "filter": ["icu_folding", "icu_normalizer", "no_stop_filter"]
+          },
+          "polish_analyzer": {
+            "type": "polish"
+          },
+          "ru_analyzer_stop": {
+            "tokenizer": "icu_tokenizer",
+            "filter": ["icu_folding", "icu_normalizer", "ru_stem_filter"]
+          },
+          "sv_analyzer_stop": {
+            "tokenizer": "icu_tokenizer",
+            "filter": ["icu_folding", "icu_normalizer", "sv_stem_filter"]
+          },
+          "unicode_analyzer": {
+            "type": "custom",
+            "tokenizer": "icu_tokenizer",
+            "filter": ["lowercase", "word_delimiter"]
+          }
+        },
+        "char_filter": {
+          "tsconvert": {
+            "type": "stconvert",
+            "delimiter": "#",
+            "keep_both": false,
+            "convert_type": "t2s"
+          }
+        },
+        "filter": {
+          "en_stem_filter": {
+            "type": "stemmer",
+            "name": "minimal_english"
+          },
+          "es_stem_filter": {
+            "type": "stemmer",
+            "name": "light_spanish"
+          },
+          "no_stop_filter": {
+            "type": "stop",
+            "stopwords": ["_norwegian_"]
+          },
+          "ru_stem_filter": {
+            "type": "stemmer",
+            "name": "light_swedish"
+          },
+          "sv_stem_filter": {
+            "type": "stemmer",
+            "name": "light_russian"
+          },
+          "tsconvert": {
+            "type": "stconvert",
+            "delimiter": "#",
+            "keep_both": false,
+            "convert_type": "t2s"
+          }
+        },
+        "normalizer": {
+          "case_insensitive_nomoralizer": {
+            "type": "custom",
+            "filter": ["lowercase", "asciifolding"]
+          }
+        }
+      }
+    }
+  },
+  "mappings": {
+    "_doc": {
+      "dynamic": "strict",
+      "properties": {
+        "app_key": {
+          "type": "keyword",
+          "store": true
+        },
+        "app_type": {
+          "type": "long",
+          "store": true
+        },
+        "author_id": {
+          "type": "keyword",
+          "store": true
+        },
+        "binary": {
+          "type": "keyword",
+          "store": true
+        },
+        "binary_group_id": {
+          "type": "keyword",
+          "store": true
+        },
+        "binary_chksum": {
+          "type": "keyword",
+          "store": true
+        },
+        "category_id": {
+          "type": "keyword",
+          "store": true
+        },
+        "media_type": {
+          "type": "keyword",
+          "store": true
+        },
+        "cloud": {
+          "properties": {
+            "objs": {
+              "type": "nested",
+              "properties": {
+                "attributes": {
+                  "type": "nested",
+                  "properties": {
+                    "key": {
+                      "type": "keyword",
+                      "store": true
+                    },
+                    "value": {
+                      "type": "text",
+                      "store": true
+                    }
+                  }
+                },
+                "class": {
+                  "type": "keyword",
+                  "store": true
+                },
+                "height": {
+                  "type": "double",
+                  "store": true
+                },
+                "mime": {
+                  "type": "text",
+                  "store": true
+                },
+                "key": {
+                  "type": "keyword",
+                  "store": true
+                },
+                "name": {
+                  "type": "keyword",
+                  "store": true
+                },
+                "obj_type": {
+                  "type": "long",
+                  "store": true
+                },
+                "prefix_path": {
+                  "type": "keyword",
+                  "store": true
+                },
+                "size": {
+                  "type": "long",
+                  "store": true
+                },
+                "type": {
+                  "type": "keyword",
+                  "store": true
+                },
+                "update_ts": {
+                  "type": "long",
+                  "store": true
+                },
+                "width": {
+                  "type": "double",
+                  "store": true
+                },
+                "region": {
+                  "type": "keyword",
+                  "store": true
+                },
+                "bucket": {
+                  "type": "keyword",
+                  "store": true
+                }
+              }
+            }
+          }
+        },
+        "concurrent_session": {
+          "type": "long",
+          "store": true
+        },
+        "contact": {
+          "type": "keyword",
+          "store": true
+        },
+        "content_rating": {
+          "type": "long",
+          "store": true
+        },
+        "country": {
+          "type": "keyword",
+          "store": true
+        },
+        "create_time": {
+          "type": "long",
+          "store": true
+        },
+        "default_language": {
+          "type": "keyword",
+          "store": true
+        },
+        "default_price_currency": {
+          "type": "keyword",
+          "store": true
+        },
+        "desc": {
+          "properties": {
+            "cs_cz": {
+              "type": "text",
+              "analyzer": "czech",
+              "store": true
+            },
+            "da_dk": {
+              "type": "text",
+              "analyzer": "danish",
+              "store": true
+            },
+            "nl_nl": {
+              "type": "text",
+              "analyzer": "dutch",
+              "store": true
+            },
+            "en_us": {
+              "type": "text",
+              "analyzer": "en_analyzer_stop",
+              "store": true
+            },
+            "fi_fi": {
+              "type": "text",
+              "analyzer": "finnish",
+              "store": true
+            },
+            "fr_fr": {
+              "type": "text",
+              "analyzer": "french",
+              "store": true
+            },
+            "de_de": {
+              "type": "text",
+              "analyzer": "german",
+              "store": true
+            },
+            "it_it": {
+              "type": "text",
+              "analyzer": "italian",
+              "store": true
+            },
+            "ja_jp": {
+              "type": "text",
+              "analyzer": "ja_analyzer",
+              "store": true
+            },
+            "ko_kr": {
+              "type": "text",
+              "analyzer": "ko_analyzer",
+              "store": true
+            },
+            "es_la": {
+              "type": "text",
+              "analyzer": "es_analyzer_stop",
+              "store": true
+            },
+            "nb_no": {
+              "type": "text",
+              "analyzer": "no_analyzer",
+              "store": true
+            },
+            "pl_pl": {
+              "type": "text",
+              "analyzer": "polish_analyzer",
+              "store": true
+            },
+            "es_es": {
+              "type": "text",
+              "analyzer": "es_analyzer_stop",
+              "store": true
+            },
+            "zh_cn": {
+              "type": "text",
+              "analyzer": "ik_max_word_sc",
+              "search_analyzer": "ik_smart_sc",
+              "store": true
+            },
+            "sv_se": {
+              "type": "text",
+              "analyzer": "sv_analyzer_stop",
+              "store": true
+            },
+            "zh_tw": {
+              "type": "text",
+              "analyzer": "ik_max_word_tc",
+              "search_analyzer": "ik_smart_tc",
+              "store": true
+            },
+            "ru_ru": {
+              "type": "text",
+              "analyzer": "ru_analyzer_stop",
+              "store": true
+            }
+          }
+        },
+        "short_desc": {
+          "properties": {
+            "cs_cz": {
+              "type": "text",
+              "analyzer": "czech",
+              "store": true
+            },
+            "da_dk": {
+              "type": "text",
+              "analyzer": "danish",
+              "store": true
+            },
+            "nl_nl": {
+              "type": "text",
+              "analyzer": "dutch",
+              "store": true
+            },
+            "en_us": {
+              "type": "text",
+              "analyzer": "en_analyzer_stop",
+              "store": true
+            },
+            "fi_fi": {
+              "type": "text",
+              "analyzer": "finnish",
+              "store": true
+            },
+            "fr_fr": {
+              "type": "text",
+              "analyzer": "french",
+              "store": true
+            },
+            "de_de": {
+              "type": "text",
+              "analyzer": "german",
+              "store": true
+            },
+            "it_it": {
+              "type": "text",
+              "analyzer": "italian",
+              "store": true
+            },
+            "ja_jp": {
+              "type": "text",
+              "analyzer": "ja_analyzer",
+              "store": true
+            },
+            "ko_kr": {
+              "type": "text",
+              "analyzer": "ko_analyzer",
+              "store": true
+            },
+            "es_la": {
+              "type": "text",
+              "analyzer": "es_analyzer_stop",
+              "store": true
+            },
+            "nb_no": {
+              "type": "text",
+              "analyzer": "no_analyzer",
+              "store": true
+            },
+            "pl_pl": {
+              "type": "text",
+              "analyzer": "polish_analyzer",
+              "store": true
+            },
+            "es_es": {
+              "type": "text",
+              "analyzer": "es_analyzer_stop",
+              "store": true
+            },
+            "zh_cn": {
+              "type": "text",
+              "analyzer": "ik_max_word_sc",
+              "search_analyzer": "ik_smart_sc",
+              "store": true
+            },
+            "sv_se": {
+              "type": "text",
+              "analyzer": "sv_analyzer_stop",
+              "store": true
+            },
+            "zh_tw": {
+              "type": "text",
+              "analyzer": "ik_max_word_tc",
+              "search_analyzer": "ik_smart_tc",
+              "store": true
+            },
+            "ru_ru": {
+              "type": "text",
+              "analyzer": "ru_analyzer_stop",
+              "store": true
+            }
+          }
+        },
+        "extra_docs": {
+          "properties": {
+            "attributes": {
+              "type": "nested",
+              "properties": {
+                "key": {
+                  "type": "keyword",
+                  "store": true
+                },
+                "value": {
+                  "type": "keyword",
+                  "store": true
+                }
+              }
+            },
+            "content_l10n": {
+              "properties": {
+                "cs_cz": {
+                  "type": "keyword",
+                  "store": true,
+                  "ignore_above": 256
+                },
+                "da_dk": {
+                  "type": "keyword",
+                  "store": true,
+                  "ignore_above": 256
+                },
+                "nl_nl": {
+                  "type": "keyword",
+                  "store": true,
+                  "ignore_above": 256
+                },
+                "en_us": {
+                  "type": "keyword",
+                  "store": true,
+                  "ignore_above": 256
+                },
+                "fi_fi": {
+                  "type": "keyword",
+                  "store": true,
+                  "ignore_above": 256
+                },
+                "fr_fr": {
+                  "type": "keyword",
+                  "store": true,
+                  "ignore_above": 256
+                },
+                "de_de": {
+                  "type": "keyword",
+                  "store": true,
+                  "ignore_above": 256
+                },
+                "it_it": {
+                  "type": "keyword",
+                  "store": true,
+                  "ignore_above": 256
+                },
+                "ja_jp": {
+                  "type": "keyword",
+                  "store": true,
+                  "ignore_above": 256
+                },
+                "ko_kr": {
+                  "type": "keyword",
+                  "store": true,
+                  "ignore_above": 256
+                },
+                "es_la": {
+                  "type": "keyword",
+                  "store": true,
+                  "ignore_above": 256
+                },
+                "nb_no": {
+                  "type": "keyword",
+                  "store": true,
+                  "ignore_above": 256
+                },
+                "pl_pl": {
+                  "type": "keyword",
+                  "store": true,
+                  "ignore_above": 256
+                },
+                "es_es": {
+                  "type": "keyword",
+                  "store": true,
+                  "ignore_above": 256
+                },
+                "zh_cn": {
+                  "type": "keyword",
+                  "store": true,
+                  "ignore_above": 256
+                },
+                "sv_se": {
+                  "type": "keyword",
+                  "store": true,
+                  "ignore_above": 256
+                },
+                "zh_tw": {
+                  "type": "keyword",
+                  "store": true,
+                  "ignore_above": 256
+                },
+                "ru_ru": {
+                  "type": "keyword",
+                  "store": true,
+                  "ignore_above": 256
+                }
+              }
+            },
+            "key": {
+              "type": "keyword",
+              "store": true
+            },
+            "update_time": {
+              "type": "date",
+              "format": "epoch_second",
+              "store": true
+            },
+            "url": {
+              "type": "keyword",
+              "store": true
+            }
+          }
+        },
+        "gallery": {
+          "properties": {
+            "cover": {
+              "type": "keyword",
+              "store": true
+            },
+            "height": {
+              "type": "double",
+              "store": true
+            },
+            "media_type": {
+              "type": "long",
+              "store": true
+            },
+            "mime": {
+              "type": "keyword",
+              "store": true
+            },
+            "thumbnail": {
+              "properties": {
+                "height": {
+                  "type": "double",
+                  "store": true
+                },
+                "url": {
+                  "type": "keyword",
+                  "store": true
+                },
+                "width": {
+                  "type": "double",
+                  "store": true
+                },
+                "update_time": {
+                  "type": "date",
+                  "format": "epoch_second",
+                  "store": true
+                }
+              }
+            },
+            "url": {
+              "type": "keyword",
+              "store": true
+            },
+            "width": {
+              "type": "double",
+              "store": true
+            },
+            "update_time": {
+              "type": "date",
+              "format": "epoch_second",
+              "store": true
+            },
+            "desc": {
+              "type": "text",
+              "store": true
+            },
+            "title": {
+              "type": "text",
+              "store": true
+            }
+          }
+        },
+        "genre_ids": {
+          "type": "keyword",
+          "store": true
+        },
+        "id": {
+          "type": "keyword",
+          "store": true
+        },
+        "is_free": {
+          "type": "boolean",
+          "store": true
+        },
+        "other_system_requirement": {
+          "type": "text",
+          "store": true
+        },
+        "play_area": {
+          "type": "keyword",
+          "store": true
+        },
+        "price": {
+          "type": "nested",
+          "properties": {
+            "currency": {
+              "type": "keyword",
+              "store": true
+            },
+            "price": {
+              "type": "double",
+              "store": true
+            }
+          }
+        },
+        "price_adjustment": {
+          "type": "integer",
+          "store": true
+        },
+        "epoch_status": {
+          "type": "integer",
+          "store": true
+        },
+        "process_status": {
+          "type": "integer",
+          "store": true
+        },
+        "product_status": {
+          "type": "integer",
+          "store": true
+        },
+        "product_ids": {
+          "type": "keyword",
+          "store": true
+        },
+        "publish_date": {
+          "type": "date",
+          "format": "epoch_second",
+          "store": true
+        },
+        "expected_release_date": {
+          "type": "date",
+          "format": "epoch_second",
+          "store": true
+        },
+        "release_note": {
+          "type": "text",
+          "store": true
+        },
+        "release_note_l10n": {
+          "properties": {
+            "cs_cz": {
+              "type": "keyword",
+              "store": true
+            },
+            "da_dk": {
+              "type": "keyword",
+              "store": true
+            },
+            "nl_nl": {
+              "type": "keyword",
+              "store": true
+            },
+            "en_us": {
+              "type": "keyword",
+              "store": true
+            },
+            "fi_fi": {
+              "type": "keyword",
+              "store": true
+            },
+            "fr_fr": {
+              "type": "keyword",
+              "store": true
+            },
+            "de_de": {
+              "type": "keyword",
+              "store": true
+            },
+            "it_it": {
+              "type": "keyword",
+              "store": true
+            },
+            "ja_jp": {
+              "type": "keyword",
+              "store": true
+            },
+            "ko_kr": {
+              "type": "keyword",
+              "store": true
+            },
+            "es_la": {
+              "type": "keyword",
+              "store": true
+            },
+            "nb_no": {
+              "type": "keyword",
+              "store": true
+            },
+            "pl_pl": {
+              "type": "keyword",
+              "store": true
+            },
+            "es_es": {
+              "type": "keyword",
+              "store": true
+            },
+            "zh_cn": {
+              "type": "keyword",
+              "store": true
+            },
+            "sv_se": {
+              "type": "keyword",
+              "store": true
+            },
+            "zh_tw": {
+              "type": "keyword",
+              "store": true
+            },
+            "ru_ru": {
+              "type": "keyword",
+              "store": true
+            }
+          }
+        },
+        "release_time": {
+          "type": "long",
+          "store": true
+        },
+        "single_player": {
+          "type": "boolean",
+          "store": true
+        },
+        "system_requirement": {
+          "properties": {
+            "os": {
+              "type": "text",
+              "store": true
+            },
+            "osbits": {
+              "type": "text",
+              "store": true
+            },
+            "others": {
+              "properties": {
+                "directx_version": {
+                  "type": "text",
+                  "store": true
+                },
+                "disk_space": {
+                  "type": "text",
+                  "store": true
+                },
+                "disk_space_unit": {
+                  "type": "text",
+                  "store": true
+                },
+                "graphics": {
+                  "type": "text",
+                  "store": true
+                },
+                "memory_size": {
+                  "type": "text",
+                  "store": true
+                },
+                "memory_unit": {
+                  "type": "text",
+                  "store": true
+                },
+                "notes": {
+                  "type": "text",
+                  "store": true
+                },
+                "notes_l10n": {
+                  "properties": {
+                    "cs_cz": {
+                      "type": "keyword",
+                      "store": true
+                    },
+                    "da_dk": {
+                      "type": "keyword",
+                      "store": true
+                    },
+                    "nl_nl": {
+                      "type": "keyword",
+                      "store": true
+                    },
+                    "en_us": {
+                      "type": "keyword",
+                      "store": true
+                    },
+                    "fi_fi": {
+                      "type": "keyword",
+                      "store": true
+                    },
+                    "fr_fr": {
+                      "type": "keyword",
+                      "store": true
+                    },
+                    "de_de": {
+                      "type": "keyword",
+                      "store": true
+                    },
+                    "it_it": {
+                      "type": "keyword",
+                      "store": true
+                    },
+                    "ja_jp": {
+                      "type": "keyword",
+                      "store": true
+                    },
+                    "ko_kr": {
+                      "type": "keyword",
+                      "store": true
+                    },
+                    "es_la": {
+                      "type": "keyword",
+                      "store": true
+                    },
+                    "nb_no": {
+                      "type": "keyword",
+                      "store": true
+                    },
+                    "pl_pl": {
+                      "type": "keyword",
+                      "store": true
+                    },
+                    "es_es": {
+                      "type": "keyword",
+                      "store": true
+                    },
+                    "zh_cn": {
+                      "type": "keyword",
+                      "store": true
+                    },
+                    "sv_se": {
+                      "type": "keyword",
+                      "store": true
+                    },
+                    "zh_tw": {
+                      "type": "keyword",
+                      "store": true
+                    },
+                    "ru_ru": {
+                      "type": "keyword",
+                      "store": true
+                    }
+                  }
+                },
+                "processor": {
+                  "type": "text",
+                  "store": true
+                }
+              }
+            }
+          }
+        },
+        "thumbnails": {
+          "properties": {
+            "large": {
+              "properties": {
+                "height": {
+                  "type": "double",
+                  "store": true
+                },
+                "url": {
+                  "type": "keyword",
+                  "store": true
+                },
+                "width": {
+                  "type": "double",
+                  "store": true
+                },
+                "update_time": {
+                  "type": "date",
+                  "format": "epoch_second",
+                  "store": true
+                }
+              }
+            },
+            "medium": {
+              "properties": {
+                "height": {
+                  "type": "double",
+                  "store": true
+                },
+                "url": {
+                  "type": "keyword",
+                  "store": true
+                },
+                "width": {
+                  "type": "double",
+                  "store": true
+                },
+                "update_time": {
+                  "type": "date",
+                  "format": "epoch_second",
+                  "store": true
+                }
+              }
+            },
+            "small": {
+              "properties": {
+                "height": {
+                  "type": "double",
+                  "store": true
+                },
+                "url": {
+                  "type": "keyword",
+                  "store": true
+                },
+                "width": {
+                  "type": "double",
+                  "store": true
+                },
+                "update_time": {
+                  "type": "date",
+                  "format": "epoch_second",
+                  "store": true
+                }
+              }
+            },
+            "square": {
+              "properties": {
+                "height": {
+                  "type": "double",
+                  "store": true
+                },
+                "url": {
+                  "type": "keyword",
+                  "store": true
+                },
+                "width": {
+                  "type": "double",
+                  "store": true
+                },
+                "update_time": {
+                  "type": "date",
+                  "format": "epoch_second",
+                  "store": true
+                }
+              }
+            }
+          }
+        },
+        "title": {
+          "properties": {
+            "cs_cz": {
+              "type": "text",
+              "analyzer": "czech",
+              "store": true,
+              "fields": {
+                "_raw": {
+                  "type": "keyword",
+                  "normalizer": "case_insensitive_nomoralizer"
+                }
+              }
+            },
+            "da_dk": {
+              "type": "text",
+              "analyzer": "danish",
+              "store": true,
+              "fields": {
+                "_raw": {
+                  "type": "keyword",
+                  "normalizer": "case_insensitive_nomoralizer"
+                }
+              }
+            },
+            "nl_nl": {
+              "type": "text",
+              "analyzer": "dutch",
+              "store": true,
+              "fields": {
+                "_raw": {
+                  "type": "keyword",
+                  "normalizer": "case_insensitive_nomoralizer"
+                }
+              }
+            },
+            "en_us": {
+              "type": "text",
+              "analyzer": "en_analyzer_stop",
+              "store": true,
+              "fields": {
+                "_raw": {
+                  "type": "keyword",
+                  "normalizer": "case_insensitive_nomoralizer"
+                }
+              }
+            },
+            "fi_fi": {
+              "type": "text",
+              "analyzer": "finnish",
+              "store": true,
+              "fields": {
+                "_raw": {
+                  "type": "keyword",
+                  "normalizer": "case_insensitive_nomoralizer"
+                }
+              }
+            },
+            "fr_fr": {
+              "type": "text",
+              "analyzer": "french",
+              "store": true,
+              "fields": {
+                "_raw": {
+                  "type": "keyword",
+                  "normalizer": "case_insensitive_nomoralizer"
+                }
+              }
+            },
+            "de_de": {
+              "type": "text",
+              "analyzer": "german",
+              "store": true,
+              "fields": {
+                "_raw": {
+                  "type": "keyword",
+                  "normalizer": "case_insensitive_nomoralizer"
+                }
+              }
+            },
+            "it_it": {
+              "type": "text",
+              "analyzer": "italian",
+              "store": true,
+              "fields": {
+                "_raw": {
+                  "type": "keyword",
+                  "normalizer": "case_insensitive_nomoralizer"
+                }
+              }
+            },
+            "ja_jp": {
+              "type": "text",
+              "analyzer": "ja_analyzer",
+              "store": true,
+              "fields": {
+                "_raw": {
+                  "type": "keyword",
+                  "normalizer": "case_insensitive_nomoralizer"
+                }
+              }
+            },
+            "ko_kr": {
+              "type": "text",
+              "analyzer": "ko_analyzer",
+              "store": true,
+              "fields": {
+                "_raw": {
+                  "type": "keyword",
+                  "normalizer": "case_insensitive_nomoralizer"
+                }
+              }
+            },
+            "es_la": {
+              "type": "text",
+              "analyzer": "es_analyzer_stop",
+              "store": true,
+              "fields": {
+                "_raw": {
+                  "type": "keyword",
+                  "normalizer": "case_insensitive_nomoralizer"
+                }
+              }
+            },
+            "nb_no": {
+              "type": "text",
+              "analyzer": "no_analyzer",
+              "store": true,
+              "fields": {
+                "_raw": {
+                  "type": "keyword",
+                  "normalizer": "case_insensitive_nomoralizer"
+                }
+              }
+            },
+            "pl_pl": {
+              "type": "text",
+              "analyzer": "polish_analyzer",
+              "store": true,
+              "fields": {
+                "_raw": {
+                  "type": "keyword",
+                  "normalizer": "case_insensitive_nomoralizer"
+                }
+              }
+            },
+            "es_es": {
+              "type": "text",
+              "analyzer": "es_analyzer_stop",
+              "store": true,
+              "fields": {
+                "_raw": {
+                  "type": "keyword",
+                  "normalizer": "case_insensitive_nomoralizer"
+                }
+              }
+            },
+            "zh_cn": {
+              "type": "text",
+              "analyzer": "ik_max_word_sc",
+              "search_analyzer": "ik_smart_sc",
+              "store": true,
+              "fields": {
+                "_raw": {
+                  "type": "keyword",
+                  "normalizer": "case_insensitive_nomoralizer"
+                }
+              }
+            },
+            "sv_se": {
+              "type": "text",
+              "analyzer": "sv_analyzer_stop",
+              "store": true,
+              "fields": {
+                "_raw": {
+                  "type": "keyword",
+                  "normalizer": "case_insensitive_nomoralizer"
+                }
+              }
+            },
+            "zh_tw": {
+              "type": "text",
+              "analyzer": "ik_max_word_tc",
+              "search_analyzer": "ik_smart_tc",
+              "store": true,
+              "fields": {
+                "_raw": {
+                  "type": "keyword",
+                  "normalizer": "case_insensitive_nomoralizer"
+                }
+              }
+            },
+            "ru_ru": {
+              "type": "text",
+              "analyzer": "ru_analyzer_stop",
+              "store": true,
+              "fields": {
+                "_raw": {
+                  "type": "keyword",
+                  "normalizer": "case_insensitive_nomoralizer"
+                }
+              }
+            }
+          }
+        },
+        "update_time": {
+          "type": "date",
+          "format": "epoch_second",
+          "store": true
+        },
+        "use_drm_sdk": {
+          "type": "boolean",
+          "store": true
+        },
+        "use_drm_wrapper": {
+          "type": "boolean",
+          "store": true
+        },
+        "version_code": {
+          "type": "date",
+          "format": "epoch_second",
+          "store": true
+        },
+        "binary_version_code": {
+          "type": "date",
+          "format": "epoch_second",
+          "store": true
+        },
+        "version_name": {
+          "type": "keyword",
+          "store": true
+        },
+        "vrmanifest": {
+          "type": "keyword",
+          "ignore_above": 256
+        },
+        "purchase_count": {
+          "type": "nested",
+          "properties": {
+            "pur_count": {
+              "type": "integer",
+              "store": true
+            },
+            "pur_country": {
+              "type": "keyword",
+              "store": true
+            }
+          }
+        },
+        "features": {
+          "type": "keyword",
+          "store": true
+        },
+        "frd_agreement": {
+          "type": "integer",
+          "store": true
+        },
+        "viveport_agreement": {
+          "type": "integer",
+          "store": true
+        },
+        "auto_publish_new_country": {
+          "type": "integer",
+          "store": true
+        },
+        "input_methods": {
+          "type": "keyword"
+        },
+        "publisher": {
+          "type": "text",
+          "analyzer": "unicode_analyzer",
+          "store": true,
+          "fields": {
+            "_raw": {
+              "type": "keyword",
+              "normalizer": "case_insensitive_nomoralizer"
+            }
+          }
+        },
+        "publisher_email": {
+          "type": "keyword",
+          "store": true
+        },
+        "lang_supported": {
+          "properties": {
+            "audio": {
+              "type": "keyword",
+              "store": true
+            },
+            "interface": {
+              "type": "keyword",
+              "store": true
+            },
+            "subtitle": {
+              "type": "keyword",
+              "store": true
+            }
+          }
+        },
+        "enrolled_subscription": {
+          "type": "keyword",
+          "store": true
+        },
+        "device_optimizations": {
+          "type": "keyword",
+          "store": true
+        },
+        "player_num": {
+          "type": "keyword",
+          "store": true
+        },
+        "parent_app_id": {
+          "type": "keyword",
+          "store": true
+        },
+        "follow_base_country": {
+          "type": "integer",
+          "store": true
+        },
+        "hw_matrix": {
+          "properties": {
+            "headsets": {
+              "type": "keyword",
+              "store": true
+            },
+            "headset_features": {
+              "type": "keyword",
+              "store": true
+            }
+          }
+        },
+        "binary_last_modified_time": {
+          "type": "date",
+          "format": "epoch_second",
+          "store": true
+        },
+        "binary_latest_publish_time": {
+          "type": "date",
+          "format": "epoch_second",
+          "store": true
+        },
+        "binary_update_time": {
+          "type": "date",
+          "format": "epoch_second",
+          "store": true
+        },
+        "first_release_time": {
+          "type": "date",
+          "format": "epoch_second",
+          "store": true
+        },
+        "viveport_awards": {
+          "type": "nested",
+          "properties": {
+            "subject": {
+              "type": "keyword",
+              "store": true
+            },
+            "join": {
+              "type": "integer",
+              "store": true
+            },
+            "opt": {
+              "type": "keyword",
+              "store": true
+            }
+          }
+        },
+        "coming_soon_date_type": {
+          "type": "keyword",
+          "store": true
+        },
+        "target_device_ids": {
+          "type": "keyword",
+          "store": true
+        },
+        "control_capability_ids": {
+          "type": "keyword",
+          "store": true
+        },
+        "mobile_manifest": {
+          "properties": {
+            "controller": {
+              "type": "keyword",
+              "store": true
+            },
+            "controller_num": {
+              "type": "keyword",
+              "store": true
+            },
+            "hmd": {
+              "type": "keyword",
+              "store": true
+            },
+            "min_wave_sdk_version": {
+              "type": "integer",
+              "store": true
+            },
+            "target_wave_sdk_version": {
+              "type": "integer",
+              "store": true
+            }
+          }
+        },
+        "min_sdk_version": {
+          "type": "integer",
+          "store": true
+        },
+        "package_name": {
+          "type": "keyword",
+          "store": true
+        },
+        "permissions": {
+          "type": "keyword",
+          "store": true
+        },
+        "runtime": {
+          "type": "keyword",
+          "store": true
+        },
+        "signature": {
+          "type": "keyword",
+          "store": true
+        },
+        "offer_id": {
+          "type": "keyword",
+          "store": true
+        },
+        "offer_id_new": {
+          "type": "keyword",
+          "store": true
+        },
+        "offer_status": {
+          "type": "integer",
+          "store": true
+        },
+        "policy_id": {
+          "type": "keyword",
+          "store": true
+        },
+        "app_edit_info": {
+          "properties": {
+            "last_editor": {
+              "type": "keyword",
+              "store": true
+            }
+          }
+        },
+        "app_settings": {
+          "properties": {
+            "china_law": {
+              "type": "integer",
+              "store": true
+            },
+            "china_law_desc": {
+              "type": "keyword",
+              "store": true
+            },
+            "need_wrapper": {
+              "type": "integer",
+              "store": true
+            },
+            "revenue_default": {
+              "type": "integer",
+              "store": true
+            },
+            "revenue_developer": {
+              "type": "double",
+              "store": true
+            },
+            "revenue_platform": {
+              "type": "double",
+              "store": true
+            },
+            "store_list": {
+              "type": "keyword",
+              "store": true
+            }
+          }
+        },
+        "developer_display_name": {
+          "type": "keyword",
+          "store": true
+        },
+        "datetime": {
+          "properties": {
+            "last_submission": {
+              "type": "long",
+              "store": true
+            },
+            "arcade_opt_out": {
+              "type": "date",
+              "format": "epoch_second",
+              "store": true
+            }
+          }
+        },
+        "hw_compatible_priority": {
+          "properties": {
+            "cosmos": {
+              "type": "integer",
+              "store": true
+            },
+            "internal_rating": {
+              "type": "integer",
+              "store": true
+            }
+          }
+        },
+        "document": {
+          "properties": {
+            "url": {
+              "type": "text",
+              "store": true
+            },
+            "desc": {
+              "type": "text",
+              "store": true
+            },
+            "name": {
+              "type": "text",
+              "store": true
+            },
+            "update_time": {
+              "type": "date",
+              "format": "epoch_second",
+              "store": true
+            }
+          }
+        }
+      }
+    }
+  }
+}
